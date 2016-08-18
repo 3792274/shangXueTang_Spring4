@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+		<property name="username" value="root"/>
+		<property name="password" value="12369"/>
+	</bean>
+	
+	
+	<!-- 声明式事务配置 开始 -->
+	<!-- 配置事务管理器 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- 配置事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- 配置哪些方法使用什么样的事务,配置事务的传播特性 -->
+			<tx:method name="add" propagation="REQUIRED"/>
+			<tx:method name="insert" propagation="REQUIRED"/>
+			<tx:method name="update" propagation="REQUIRED"/>
+			<tx:method name="delete" propagation="REQUIRED"/>
+			<tx:method name="remove*" propagation="REQUIRED"/>
+			<tx:method name="get" read-only="true"/>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* spring4_mybatis.dao.*.*(..))" id="pointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+	</aop:config>
+	<!-- 声明式事务配置 结束 -->
+	
+	
+<!-- #################################################################################################### -->	
+	
+	
+	<!-- 配置 sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:spring4_mybatis/test/mybatis.cfg.xml"/>
+	</bean>
+	
+	
+	<!-- 配置 sqlSessionFactory,可以整体去掉Mybatis.cfg.xml,直接在此扫描map映射文件 -->
+	<bean id="sqlSessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:spring4_mybatis/vo/*.mapper.xml"></property>
+	</bean>
+	
+	
+	
+	
+	
+<!-- #################################################################################################### -->	
+	<!-- 继承Mybatis 一种， Dao使用 SqlSessionTemplate ,有BUG-->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+
+	
+	<bean id="userDao" class="spring4_mybatis.dao.UserDaoImpl">
+		<property name="sqlSession" ref="sqlSessionTemplate"/>
+	</bean>
+	
+		
+<!-- #################################################################################################### -->	
+	<!-- 继承Mybatis 二种，使Dao继承SqlSessionDaoSupport  -->
+	<bean id="userDao2" class="spring4_mybatis.dao.UserDaoImpl2">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	
+<!-- #################################################################################################### -->	
+	<!-- 继承Mybatis 三种，注解Spring集成Mybatis，需要配置bean.xml,添加UserMapper,并且使用了抛弃mybatis.cfg.xml的sqlSessionFactory1 -->
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="spring4_mybatis.vo.UserMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory1"/>
+	</bean>
+	<bean id="userDao3" class="spring4_mybatis.dao.UserDaoImpl3">
+		<property name="userMapper" ref="userMapper"/>
+	</bean>
+	
+</beans>

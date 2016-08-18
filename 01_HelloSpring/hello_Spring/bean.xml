@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+  <!-- bean就是java对象  由spring来创建和管理 -->    
+   
+   <!-- id是bean的标识符 要唯一  如果没有配置id，name默认标识符 
+   		如果配置id，又配置了name 那么name是别名
+   		name可以设置多个别名 分隔符可以 是 空格 逗号 分号
+   		class是bean的全限定名=包名+类名
+   		如果不配置 id,和name 那么可以根据applicationContext.getBean(Class) 获取对象
+   		
+   		可以导入多个： <import resource="config/spring/entity.xml"/>
+   -->
+   
+
+<bean id="hello" class="hello_Spring.Hello"  scope="singleton">
+	<property name="name" value="张三"> </property>
+</bean>
+
+
+</beans>

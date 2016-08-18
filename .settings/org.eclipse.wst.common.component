@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="scx-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/01_HelloSpring"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/02_NoUseSpringExample"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/03_UseSpringExample"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/04_自定义BeanFactory"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/05_Spring属性注入_DI"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/06_SpringXML自动装配AutoWiring"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/07_Java静态代理"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/08_Java动态代理"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/09_SpringAOP使用实现Advice接口"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/10_SpringAOP使用自定义类"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/11_SpringAOP使用自定义类Annotation"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/12_spring4_Mybatis"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/13_spring4_struts2_mybatis"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/14_spring4_struts2_mybatis_annotation"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/15_点餐示例"/>
+        <property name="java-output-path" value="/尚学堂Spring4/build/classes"/>
+        <property name="context-root" value="scx"/>
+    </wb-module>
+</project-modules>

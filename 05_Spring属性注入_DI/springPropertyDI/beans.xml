@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ 
+ 
+    	<!-- bean的作用域   
+	    	singleton单列  整个容器中只有一个对象实例 默认是单列
+	    	prototype原型 每次获取bean都产生一个新的对象
+	    	request 每次请求时创建一个新的对象
+	    	session 在会话的范围内时一个对象
+	    	global session 只在portlet下有用，表示是application
+	    	application 在应用范围中一个对象
+    	-->
+      <bean id="addr" class="springPropertyDI.Address" scope="prototype">
+      	<property name="address" value="北京西三旗"/>
+      </bean>
+      
+      
+      
+	  <bean id="student" class="springPropertyDI.Student">
+	  	<property name="name" value="张三丰"/>
+	  	<!-- 引用对象注入 -->
+	  	<property name="addr" ref="addr"/>
+	  	<!-- 数组注入 -->
+	  	<property name="books">     
+	  		<array>
+	  			<value>傲慢与偏见</value>
+	  			<value>仲夏夜之梦</value>
+	  			<value>雾都孤儿</value>
+	  		</array>
+	  	</property>
+	  	<!-- List注入-->
+	  	<property name="hobbies">
+	  		<list>
+	  			<value>羽毛球</value>
+	  			<value>乒乓球</value>
+	  			<value>玻璃球</value>
+	  			<value>台球球</value>
+	  		</list>
+	  	</property>
+	  	<!-- Map注入 -->
+	  	<property name="cards">
+	  		<map>
+	  			<entry key="中国银行" value="149127348932174"/>
+	  			<entry>
+	  				<key><value>建设银行</value></key>
+	  				<value>622710023478234234</value>
+	  			</entry>
+	  		</map>
+	  	</property>
+	  	<!-- Set注入 -->
+	  	<property name="games">
+	  		<set>
+	  			<value>lol</value>
+	  			<value>dota</value>
+	  			<value>cs1.6</value>
+	  			<value>dnf</value>
+	  		</set>
+	  	</property>
+	  	<!-- 空注入 -->
+	  	<property name="wife"><null/></property>
+	  	<!-- Property注入 -->
+	  	<property name="info">
+	  		<props>
+	  			<prop key="学号">2015052601</prop>
+	  			<prop key="sex">男</prop>
+	  			<prop key="name">小明</prop>
+	  		</props>
+	  	</property>
+	  </bean>  
+	  
+	  
+	  
+	  
+	  <!-- p 参数 命名空间注入 属性依然要设置set方法 -->
+	  <bean id="user1" class="springPropertyDI.User" p:name="风清扬" p:age="230"/>
+	  
+	  
+	  <!-- c 构造器  命名空间注入要求有对应参数的构造方法 -->
+	  <bean id="user2" class="springPropertyDI.User" c:name="nico" c:age="16"/>
+</beans>

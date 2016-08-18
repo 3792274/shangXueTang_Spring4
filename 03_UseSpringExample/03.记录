@@ -1,0 +1,5 @@
+本类使用Spring 的情况下，实现MySqlDAO OracleDAO的切换
+
+UserDAO ->实现类（MySQLDAO  /   OracleDAO）
+
+UserServices   ->  UserServicesImpl (使用USerDAO，设置UserDAO)

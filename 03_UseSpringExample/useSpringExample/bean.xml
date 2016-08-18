@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mysqlDao" class="useSpringExample.MySqlDaoImpl" />
+	<bean id="oracleDao" class="useSpringExample.OracleDaoImpl" />
+	
+	<bean id="userServices" class="useSpringExample.UserServicesImpl"> 
+		<!-- ref引用对象（对象是由spring来创建的） -->
+		<property name="userdao" ref="oracleDao"></property>
+	</bean>
+	
+
+
+</beans>

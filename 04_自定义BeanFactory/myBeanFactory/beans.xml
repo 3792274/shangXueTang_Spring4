@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="userDynamicFactory" class="myBeanFactory.UserDynamicFactory" />
+	
+	
+	<bean id="user" factory-bean="userDynamicFactory" factory-method="newInstance" scope="prototype">
+		<constructor-arg index="0" value="王五" />   <!-- 通过构造方法注入属性 -->
+	</bean>
+	
+	
+	<!-- 设置别名 -->
+	<alias name="user" alias="user1" />
+
+</beans>

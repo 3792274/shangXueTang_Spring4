@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+ 	<typeAliases>
+		<package name="dianCan.vo"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="dianCan/vo/detail.mapper.xml"/>
+		<mapper resource="dianCan/vo/menu.mapper.xml"/>
+		<mapper resource="dianCan/vo/order.mapper.xml"/>
+	</mappers> 
+	
+</configuration>

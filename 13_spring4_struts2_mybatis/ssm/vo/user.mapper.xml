@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.vo.user.mapper">
+	
+	<select id="getAll" resultType="ssm.vo.User">
+		select * from user
+	</select>
+	
+	
+	<insert id="add" parameterType="ssm.vo.User" useGeneratedKeys="true">
+		insert into user(name,pwd) values(#{name},#{pwd})
+	</insert>
+	
+	
+	<delete id="remove">  <!-- 故意写错sql,试验事务是否好用 -->
+		deletes from user where id=#{id}
+	</delete>
+	
+	
+	
+</mapper>
